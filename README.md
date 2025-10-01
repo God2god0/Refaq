@@ -1,46 +1,172 @@
-# Getting Started with Create React App
+# ReFAQ - Re Protocol FAQ Assistant
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+An AI-powered FAQ assistant for Re Protocol, built with React, TypeScript, Vite, and TailwindCSS v4. Get instant answers about reUSD, reUSDe, yields, and more!
+
+## Features
+
+- **AI-Powered Responses** - Powered by Groq API with X.AI's Grok model
+- **Real-time Chat Interface** - Smooth typewriter effect with glass morphism design
+- **Yield Calculator** - Calculate returns for reUSD and reUSDe strategies
+- **Modern UI** - Dark theme with TailwindCSS v4 and glass effects
+- **Fast Performance** - Built with Vite for lightning-fast development and builds
+- **Responsive Design** - Works perfectly on desktop and mobile
+- **Secure** - API keys stored in environment variables
+
+## Tech Stack
+
+- **Frontend:** React 19 + TypeScript
+- **Build Tool:** Vite 5
+- **Styling:** TailwindCSS v4
+- **AI:** Groq API (X.AI Grok model)
+- **Icons:** Custom SVG icons
+- **Fonts:** Inter (Google Fonts)
+
+## Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/your-username/refaq.git
+   cd refaq
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Set up environment variables**
+   ```bash
+   cp .env.example .env
+   ```
+   
+   Add your Groq API key to `.env`:
+   ```env
+   VITE_GROQ_API_KEY=your_groq_api_key_here
+   ```
+
+4. **Start development server**
+   ```bash
+   npm run dev
+   ```
+
+5. **Open your browser**
+   Navigate to [http://localhost:5173](http://localhost:5173)
 
 ## Available Scripts
 
-In the project directory, you can run:
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Start development server (Vite) |
+| `npm run build` | Build for production |
+| `npm run preview` | Preview production build |
+| `npm run test` | Run tests (if configured) |
 
-### `npm start`
+## Design Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Glass Morphism
+- User messages have a beautiful glass effect with backdrop blur
+- Semi-transparent backgrounds with subtle borders
+- Modern, clean aesthetic
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Typewriter Effect
+- AI responses appear word by word with smooth animations
+- Custom CSS animations for enhanced user experience
+- Fast and responsive typing effect
 
-### `npm test`
+### Dark Theme
+- Carefully crafted color palette
+- High contrast for readability
+- Consistent with Re Protocol branding
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## AI Capabilities
 
-### `npm run build`
+The assistant can help with:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- **Token Information** - reUSD vs reUSDe differences
+- **Yield Calculations** - APY estimates and projections
+- **Risk Assessment** - Understanding different risk levels
+- **Getting Started** - Step-by-step guidance
+- **Technical Details** - Smart contracts, addresses, processes
+- **Strategy Comparison** - Which token suits your needs
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Project Structure
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
+refaq/
+├── public/                 # Static assets
+├── src/
+│   ├── components/         # React components
+│   │   └── ChatInterface.tsx
+│   ├── services/          # API services
+│   │   └── groqApi.ts
+│   ├── index.css          # Global styles
+│   ├── index.tsx          # App entry point
+│   └── vite-env.d.ts      # Vite type definitions
+├── index.html             # HTML template
+├── vite.config.js         # Vite configuration
+├── tailwind.config.js     # TailwindCSS configuration
+└── package.json
+```
 
-### `npm run eject`
+## Configuration
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### TailwindCSS v4
+The project uses TailwindCSS v4 with custom theme configuration:
+- Custom color palette for Re Protocol branding
+- Glass morphism utilities
+- Responsive design system
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Vite Configuration
+- TypeScript support
+- PostCSS integration
+- Hot Module Replacement (HMR)
+- Optimized builds
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Deployment
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### Build for Production
+```bash
+npm run build
+```
 
-## Learn More
+### Preview Production Build
+```bash
+npm run preview
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Deploy to Vercel/Netlify
+The project is ready for deployment on any static hosting service:
+- Vercel
+- Netlify
+- GitHub Pages
+- AWS S3 + CloudFront
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Acknowledgments
+
+- [Re Protocol](https://re.xyz/) for the amazing DeFi platform
+- [Groq](https://groq.com/) for the AI API
+- [Vite](https://vitejs.dev/) for the blazing fast build tool
+- [TailwindCSS](https://tailwindcss.com/) for the utility-first CSS framework
+
+## Support
+
+If you have any questions or need help:
+- Open an issue on GitHub
+- Check the [Re Protocol documentation](https://docs.re.xyz/)
+- Visit [re.xyz](https://re.xyz/) for more information
+
+---
+
+**Built with ❤️ for the Re Protocol community**
