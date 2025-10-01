@@ -53,6 +53,7 @@
     "vite-tsconfig-paths": "^5.1.4"
   },
   "optionalDependencies": {
-    "@rollup/rollup-linux-x64-gnu": "^4.9.0"
+    "@rollup/rollup-linux-x64-gnu": "^4.9.0",
+    "lightningcss-linux-x64-gnu": "^1.21.0"
   }
 }
