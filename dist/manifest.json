@@ -1,0 +1,56 @@
+{
+  "short_name": "ReFAQ",
+  "name": "ReFAQ - AI Assistant for Re Protocol",
+  "description": "Get instant AI-powered answers about Re Protocol, reUSD (6-9% APY), reUSDe (16-25% APY), yield calculations, and DeFi strategies. Your smart FAQ assistant for all Re Protocol questions.",
+  "icons": [],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#3b82f6",
+  "background_color": "#000000",
+  "orientation": "portrait-primary",
+  "categories": ["finance", "productivity", "utilities", "business"],
+  "lang": "en",
+  "dir": "ltr",
+  "scope": "/",
+  "id": "refaq-re-protocol-assistant",
+  "screenshots": [
+    {
+      "src": "screenshot-desktop.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide"
+    },
+    {
+      "src": "screenshot-mobile.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "form_factor": "narrow"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Ask about reUSD",
+      "short_name": "reUSD Info",
+      "description": "Get information about reUSD yields and strategies",
+      "url": "/?query=reUSD",
+      "icons": [
+        {
+          "src": "logo192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Ask about reUSDe",
+      "short_name": "reUSDe Info",
+      "description": "Get information about reUSDe yields and strategies",
+      "url": "/?query=reUSDe",
+      "icons": [
+        {
+          "src": "logo192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ]
+}
