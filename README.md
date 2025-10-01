@@ -4,7 +4,6 @@ An AI-powered FAQ assistant for Re Protocol, built with React, TypeScript, Vite,
 
 ## Features
 
-- **AI-Powered Responses** - Powered by Groq API with X.AI's Grok model
 - **Real-time Chat Interface** - Smooth typewriter effect with glass morphism design
 - **Yield Calculator** - Calculate returns for reUSD and reUSDe strategies
 - **Modern UI** - Dark theme with TailwindCSS v4 and glass effects
