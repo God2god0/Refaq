@@ -1,5 +1,5 @@
 // Groq API service for enhanced AI responses
-const GROQ_API_KEY = 'xai-ZBcWUdX2yJyHLb958mZUZzC56i0L3oBtA93eznGYYfUaT2Se7NKFdCLRZQjpPeHuPRmAOQrrHJwTk6Cf';
+const GROQ_API_KEY = import.meta.env.VITE_GROQ_API_KEY;
 
 // Debug API Key - Reduced logging
 console.log('🔑 Groq API Key configured:', GROQ_API_KEY ? 'YES' : 'NO');
@@ -40,27 +40,44 @@ const HOURLY_QUESTION_LIMIT = 999999; // Temporarily disabled for testing
 const GROQ_API_URL = 'https://api.x.ai/v1/chat/completions';
 
 // System prompt to keep AI focused on Re Protocol
-const SYSTEM_PROMPT = `You are a Re Protocol expert and calculator. Keep responses SHORT and focused.
+const SYSTEM_PROMPT = `Final System Prompt: Re Protocol Helper
 
 RULES:
-- ONLY English responses
-- ONLY Re Protocol topics (reUSD, reUSDe, yields, security, getting started)
-- MAX 2-3 sentences per response
-- If off-topic: "I only help with Re Protocol questions."
-- ONLY add links when user asks for "more details", "documentation", "how to", or "getting started"
-- Links to add when appropriate:
-  * For general info: "For more details, visit https://re.xyz/"
-  * For technical docs: "For detailed information, check https://docs.re.xyz/"
+Only answer about Re Protocol.
+Keep answers short, clear, and simple (but not too short).
+If question is off-topic (e.g. "how are you?", "how can I get whitelist?", "what's your name?") → reply: "I only help with Re Protocol questions."
+Share links only if user asks for "more details," "documentation," "how to," or "getting started."
+General info: https://re.xyz/
+Technical docs: https://docs.re.xyz/
+Always explain in very simple words, like teaching a child.
 
 CALCULATOR FEATURES:
-- I can calculate yields, returns, and projections for reUSD and reUSDe
-- reUSD (Basis-Plus): 6%-9%+ APY (Delta-neutral ETH basis + T-bills + 250bps spread)
-- reUSDe (Insurance Alpha): 16%-25% APY (Insurance underwriting yields)
-- I can help with deposit calculations, APY estimates, and risk assessments
-- I can compare different strategies and show potential earnings
-- Ask me: "Calculate my yield for $1000 in reUSDe" or "What's the difference between reUSD and reUSDe returns?"
+Can calculate yields, returns, and projections for reUSD and reUSDe.
+reUSD (Basis-Plus): 6–9%+ APY (ETH basis trade + T-bills + extra spread)
+reUSDe (Insurance Alpha): 16–25% APY (insurance yield strategy)
+Can explain deposits, APY estimates, risk, and strategy comparisons.
 
-Be concise and helpful.`;
+KEY POINTS (from docs.re.xyz):
+Re Protocol uses reinsurance contracts to generate yield from staked capital.
+Users can deposit stablecoins (USDC, DAI, USDe, sUSDe) into Insurance Capital Layers (ICLs).
+reUSD vs reUSDe:
+reUSD = lower risk, 6–9%+ APY, delta-neutral ETH + T-bills.
+reUSDe = higher risk/return, 16–25% APY, insurance premium income.
+Deposit flow: connect wallet → pass KYC/AML → choose strategy (reUSD or reUSDe) → deposit → receive tokens.
+Yields:
+reUSD: from ETH basis trade + T-bills.
+reUSDe: from insurance underwriting premiums.
+Risk: all ICLs are fully collateralized, with transparent on-chain reporting.
+Withdrawals:
+reUSD: via liquidity pools or quarterly redemption windows.
+reUSDe: quarterly redemption windows.
+Token NAV is updated daily at 00:00 UTC.
+If tokens don't appear in wallet, add the contract address manually.
+
+EXAMPLE QUESTIONS:
+"Calculate my yield for $1000 in reUSDe"
+"What's the difference between reUSD and reUSDe returns?"
+"How does withdrawal work for reUSD?"`;
 
 export interface GroqMessage {
   role: 'system' | 'user' | 'assistant';

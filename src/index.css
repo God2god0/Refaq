@@ -1,8 +1,5 @@
+@import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 
 body {
   margin: 0;
@@ -11,6 +8,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #000000;
+  color: #ffffff;
 }
 
 code {
@@ -22,14 +21,14 @@ code {
 .typewriter:not(.user-message) {
   white-space: pre-wrap;
   word-wrap: break-word;
-  text-shadow: 0 0 8px rgba(59, 130, 246, 0.3);
-  animation: gentleFade 0.3s ease-in-out;
+  text-shadow: 0 0 8px rgba(59, 130, 246, 0.2);
+  animation: smoothType 0.2s ease-out;
 }
 
-@keyframes gentleFade {
+@keyframes smoothType {
   0% {
-    opacity: 0.7;
-    transform: translateY(2px);
+    opacity: 0.8;
+    transform: translateY(1px);
   }
   100% {
     opacity: 1;
@@ -42,14 +41,14 @@ code {
   white-space: pre-wrap;
   word-wrap: break-word;
   opacity: 0;
-  animation: quickFade 0.8s ease-out forwards;
-  text-shadow: 0 0 8px rgba(59, 130, 246, 0.3);
+  animation: quickFade 0.4s ease-out forwards;
+  text-shadow: 0 0 8px rgba(59, 130, 246, 0.2);
 }
 
 @keyframes quickFade {
   0% {
     opacity: 0;
-    transform: translateX(20px);
+    transform: translateX(10px);
   }
   100% {
     opacity: 1;

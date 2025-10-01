@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { callGroqAPI, getFallbackResponse, canUserAskQuestion, incrementUserQuestionCount, testGroqConnection } from '../services/groqApi';
+import { callGroqAPI, canUserAskQuestion, testGroqConnection } from '../services/groqApi';
 
 interface Message {
   id: number;
@@ -12,7 +12,6 @@ const ChatInterface: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [isListening, setIsListening] = useState(false);
   const [hasStartedChat, setHasStartedChat] = useState(false);
   
   const [userLimits, setUserLimits] = useState<{ remainingDaily: number; remainingHourly: number }>({ remainingDaily: 15, remainingHourly: 5 });
@@ -38,7 +37,8 @@ const ChatInterface: React.FC = () => {
           msg.id === messageId ? { ...msg, text: currentText } : msg
         ));
         wordIndex++;
-        setTimeout(typeNextWord, 200); // 200ms delay for smoother effect
+        // Faster typing: 50ms delay for smooth but quick effect
+        setTimeout(typeNextWord, 50);
       }
     };
 
@@ -294,7 +294,6 @@ const ChatInterface: React.FC = () => {
     const isReUSD = lowerQuestion.includes('reusd') && !lowerQuestion.includes('reusde');
     const isReUSDe = lowerQuestion.includes('reusde');
     const isComparison = lowerQuestion.includes('compare') || lowerQuestion.includes('difference') || lowerQuestion.includes('vs');
-    const isTimeframe = lowerQuestion.includes('month') || lowerQuestion.includes('year') || lowerQuestion.includes('daily');
 
     // Calculate yields for both strategies (updated from documentation)
     const reUSDLow = amount * 0.06; // 6% APY
@@ -328,38 +327,6 @@ const ChatInterface: React.FC = () => {
     return `**🧮 Re Protocol Calculator - $${amount.toLocaleString()}:**\n\n**reUSD (Basis-Plus):**\n💰 Annual: $${reUSDLow.toFixed(2)} - $${reUSDHigh.toFixed(2)}\n📅 Monthly: $${monthlyReUSD.toFixed(2)}\n📊 Daily: $${dailyReUSD.toFixed(2)}\n🎯 APY: 6% - 9%+\n🛡️ Risk: Low\n\n**reUSDe (Insurance Alpha):**\n💰 Annual: $${reUSDeLow.toFixed(2)} - $${reUSDeHigh.toFixed(2)}\n📅 Monthly: $${monthlyReUSDe.toFixed(2)}\n📊 Daily: $${dailyReUSDe.toFixed(2)}\n🎯 APY: 16% - 25%\n⚠️ Risk: Higher\n\n*Yields based on official Re Protocol documentation.*`;
   };
 
-  const startListening = () => {
-    if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
-      const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
-      const recognition = new SpeechRecognition();
-      
-      recognition.continuous = false;
-      recognition.interimResults = false;
-      recognition.lang = 'en-US';
-      
-      recognition.onstart = () => {
-        setIsListening(true);
-      };
-      
-      recognition.onresult = (event: any) => {
-        const transcript = event.results[0][0].transcript;
-        setInputValue(transcript);
-        setIsListening(false);
-      };
-      
-      recognition.onerror = () => {
-        setIsListening(false);
-      };
-      
-      recognition.onend = () => {
-        setIsListening(false);
-      };
-      
-      recognition.start();
-    } else {
-      alert('Speech recognition not supported in this browser');
-    }
-  };
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -389,22 +356,6 @@ const ChatInterface: React.FC = () => {
                       className="flex-1 bg-transparent text-white placeholder-gray-400 outline-none text-sm"
                     />
                     
-                    <div className="flex items-center space-x-2">
-                      <button
-                        type="button"
-                        onClick={startListening}
-                        className={`transition-colors ${
-                          isListening 
-                            ? 'text-red-400 animate-pulse' 
-                            : 'text-gray-400 hover:text-white'
-                        }`}
-                      >
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
-                        </svg>
-                      </button>
-                      
-                    </div>
                   </div>
                 </form>
               </div>
@@ -420,13 +371,6 @@ const ChatInterface: React.FC = () => {
                       <span className="text-white">Re</span>
                       <span className="bg-gradient-to-r from-indigo-400 to-purple-800 bg-clip-text text-transparent">FAQ</span>
                     </h1>
-                    
-                    {/* User Limits Display */}
-                    <div className="mt-2 text-xs text-gray-400">
-                      <span>Daily: {userLimits.remainingDaily}/15</span>
-                      <span className="mx-2">•</span>
-                      <span>Hourly: {userLimits.remainingHourly}/5</span>
-                    </div>
                   </div>
 
           {/* Messages Area - Full height */}
@@ -437,21 +381,27 @@ const ChatInterface: React.FC = () => {
                           key={message.id}
                           className={`flex ${message.isUser ? 'justify-end' : 'justify-start'} mb-4`}
                         >
-                          <div className={`max-w-2xl ${message.isUser ? 'text-blue-400' : 'text-white'}`}>
-                            <p className={`text-sm leading-relaxed whitespace-pre-line typewriter ${message.isUser ? 'user-message' : ''}`}>{message.text}</p>
+                          <div className={`max-w-2xl ${message.isUser ? 'text-white' : 'text-gray-100'}`}>
+                            {message.isUser ? (
+                              <div className="px-4 py-3 rounded-2xl bg-re-card/80 backdrop-blur-md rounded-br-md border border-re-border/50 shadow-lg">
+                                <p className="text-sm leading-relaxed whitespace-pre-line typewriter user-message">{message.text}</p>
+                              </div>
+                            ) : (
+                              <p className="text-sm leading-relaxed whitespace-pre-line typewriter">{message.text}</p>
+                            )}
                           </div>
                         </div>
                       ))}
                       {isLoading && (
                         <div className="flex justify-start mb-4">
-                          <div className="text-gray-400">
+                          <div className="max-w-2xl">
                             <div className="flex items-center space-x-4">
                               <div className="flex space-x-2">
                                 <div className="w-3 h-3 bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 rounded-full animate-pulse" style={{animationDelay: '0ms', animation: 'magicalPulse 1.5s ease-in-out infinite'}}></div>
                                 <div className="w-3 h-3 bg-gradient-to-r from-purple-500 via-pink-500 to-blue-400 rounded-full animate-pulse" style={{animationDelay: '300ms', animation: 'magicalPulse 1.5s ease-in-out infinite'}}></div>
                                 <div className="w-3 h-3 bg-gradient-to-r from-pink-500 via-blue-400 to-purple-500 rounded-full animate-pulse" style={{animationDelay: '600ms', animation: 'magicalPulse 1.5s ease-in-out infinite'}}></div>
                               </div>
-                              <span className="text-sm bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent animate-pulse">
+                              <span className="text-sm text-gray-300 animate-pulse">
                                 ✨ Thinking...
                               </span>
                             </div>
@@ -475,22 +425,6 @@ const ChatInterface: React.FC = () => {
                     className="flex-1 bg-transparent text-white placeholder-gray-400 outline-none text-xs"
                   />
                   
-                  <div className="flex items-center space-x-2">
-                    <button
-                      type="button"
-                      onClick={startListening}
-                      className={`transition-colors ${
-                        isListening 
-                          ? 'text-red-400 animate-pulse' 
-                          : 'text-gray-400 hover:text-white'
-                      }`}
-                    >
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
-                      </svg>
-                    </button>
-                    
-                  </div>
                 </div>
               </form>
             </div>

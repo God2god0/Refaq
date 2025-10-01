@@ -1,6 +1,7 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "ReFAQ",
+  "name": "ReFAQ - Re Protocol FAQ Assistant",
+  "description": "Get instant answers about Re Protocol, reUSD, reUSDe, yields, and more. Your AI-powered FAQ assistant for all Re Protocol questions.",
   "icons": [
     {
       "src": "favicon.ico",
@@ -21,5 +22,7 @@
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "background_color": "#000000",
+  "orientation": "portrait-primary",
+  "categories": ["finance", "productivity", "utilities"]
 }
