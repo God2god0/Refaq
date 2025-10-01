@@ -1,28 +1,56 @@
 {
   "short_name": "ReFAQ",
-  "name": "ReFAQ - Re Protocol FAQ Assistant",
-  "description": "Get instant answers about Re Protocol, reUSD, reUSDe, yields, and more. Your AI-powered FAQ assistant for all Re Protocol questions.",
-  "icons": [
-    {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
-    },
-    {
-      "src": "logo192.png",
-      "type": "image/png",
-      "sizes": "192x192"
-    },
-    {
-      "src": "logo512.png",
-      "type": "image/png",
-      "sizes": "512x512"
-    }
-  ],
+  "name": "ReFAQ - AI Assistant for Re Protocol",
+  "description": "Get instant AI-powered answers about Re Protocol, reUSD (6-9% APY), reUSDe (16-25% APY), yield calculations, and DeFi strategies. Your smart FAQ assistant for all Re Protocol questions.",
+  "icons": [],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
+  "theme_color": "#3b82f6",
   "background_color": "#000000",
   "orientation": "portrait-primary",
-  "categories": ["finance", "productivity", "utilities"]
+  "categories": ["finance", "productivity", "utilities", "business"],
+  "lang": "en",
+  "dir": "ltr",
+  "scope": "/",
+  "id": "refaq-re-protocol-assistant",
+  "screenshots": [
+    {
+      "src": "screenshot-desktop.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide"
+    },
+    {
+      "src": "screenshot-mobile.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "form_factor": "narrow"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Ask about reUSD",
+      "short_name": "reUSD Info",
+      "description": "Get information about reUSD yields and strategies",
+      "url": "/?query=reUSD",
+      "icons": [
+        {
+          "src": "logo192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Ask about reUSDe",
+      "short_name": "reUSDe Info",
+      "description": "Get information about reUSDe yields and strategies",
+      "url": "/?query=reUSDe",
+      "icons": [
+        {
+          "src": "logo192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ]
 }
